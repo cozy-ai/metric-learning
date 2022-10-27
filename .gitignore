@@ -1,3 +1,10 @@
+# User-defined list
+train_logs/
+datasets/
+*.pth
+*.log
+*.pkl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
