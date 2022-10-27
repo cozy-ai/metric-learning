@@ -45,25 +45,3 @@ class ContrastiveWrapper(ModelWrapper):
             return super()._get_eval_metric(metric)
         metric_fn = super()._get_eval_metric(metric)
         return lambda *args, **kwargs: metric_fn(*args, **kwargs, **const_kwargs)
-    
-    '''def _precision(self, xs, ys, batch=False, k=None):
-        if batch:
-            ## batch-wise precision (out : (1,))
-            xs = torch.cat(xs,0)
-            ys = torch.cat(ys,0)
-            dist_ij = self.dist_metric(xs.unsqueeze(0), xs.unsqueeze(1)).squeeze(-1)
-            ## dist_ij : (n_batch, n_batch)
-            y_ij = ys.unsqueeze(0) == ys.unsqueeze(1)
-            
-            mask = torch.eye(y_ij.shape[0], dtype=torch.bool).to(device=dist_ij.device)
-            dist_ij = dist_ij[~mask].view(dist_ij.shape[0],-1)
-            y_ij = y_ij[~mask].view(y_ij.shape[0],-1)
-            
-            ## y_ij : (n_batch, n_batch)
-            ap = average_precision(dist_ij[y_ij], dist_ij[~y_ij], k=k, largest=self.is_sim)
-            return ap
-        else:
-            ## TODO : row-wise precision (out : (n_batch,))
-            xs = torch.stack(xs, 1)
-            ys = torch.stack(ys, 1)
-            raise NotImplementedError()'''
